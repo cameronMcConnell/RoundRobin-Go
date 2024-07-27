@@ -1,13 +1,13 @@
 # RoundRobin-Go
 
-RoundRobin-Go is a lightweight Go middleware that implements the round-robin algorithm for load balancing HTTP requests across multiple backend servers.
+RoundRobin-Go is a Go middleware implementing the round-robin algorithm for load balancing. It evenly distributes requests across multiple servers or resources in a circular order, enhancing system performance. Easy to integrate, it offers a simple solution for load distribution in Go applications.
 
 ## Features
 
-- Simple and efficient round-robin load balancing
-- Concurrent request handling
-- Easy configuration via included JSON and environment files
-- Docker support for easy deployment
+* Simple and efficient round-robin load balancing
+* Concurrent request handling
+* Easy configuration via included JSON and environment files
+* Docker support for easy deployment
 
 ## Getting Started
 
@@ -58,10 +58,10 @@ go run main.go
 
 The server will start on the address specified in the `.env` file.
 
-### Usage
+## Usage
 Once the server is running, it will distribute incoming requests to the `/roundrobin-go` endpoint across the configured backend servers in a round-robin fashion.
 
-### Docker Support
+## Docker Support
 To build and run RoundRobin-Go using Docker:
 
 1. Build the Docker image:
