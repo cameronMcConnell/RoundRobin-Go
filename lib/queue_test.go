@@ -2,26 +2,40 @@ package lib
 
 import "testing"
 
+func TestNewQueue(t *testing.T) {
+	_, err := NewQueue()
+	if err != nil {
+		t.Errorf("Error creating new queue: %v", err)
+	}
+}
+
 func TestEnque(t *testing.T) {
-	queue := newQueue()
+	queue, err := NewQueue()
+	if err != nil {
+		t.Errorf("Error creating new queue: %v", err)
+	}
 
-	vals := []string{"hello", "world", "noo"}
+	wants := []string{"abc", "def", "hij", "klm"}
 
-	for _, val := range vals {
-		queue.Enque(val)
+	queue.Enque("klm")
+
+	for _, want := range wants {
+		got, err := queue.Deque()
+		if err != nil || got != want {
+			t.Errorf("Got %s, want %s", got, want)
+		}
 	}
 }
 
 func TestDeque(t *testing.T) {
-	queue := newQueue()
-
-	vals := []string{"hello", "world", "yess"}
-
-	for _, val := range vals {
-		queue.Enque(val)
+	queue, err := NewQueue()
+	if err != nil {
+		t.Error(err)
 	}
 
-	for _, want := range vals {
+	wants := []string{"abc", "def", "hij"}
+
+	for _, want := range wants {
 		got, err := queue.Deque()
 		if err != nil || got != want {
 			t.Errorf("Got %s, want %s", got, want)

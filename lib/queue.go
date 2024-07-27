@@ -3,7 +3,7 @@ package lib
 import "errors"
 
 type QueueNode struct {
-	value string
+	Value string
 	next *QueueNode
 }
 
@@ -12,8 +12,21 @@ type Queue struct {
 	tail *QueueNode
 }
 
-func newQueue() Queue {
-	return Queue{}
+func NewQueue() (*Queue, error) {
+	configReader := NewConfigReader("servers.json")
+
+	servers, err := configReader.ReadConfig()
+	if err != nil {
+		return nil, err
+	}
+
+	queue := &Queue{}
+
+	for _, server := range servers {
+		queue.Enque(server)
+	}
+
+	return queue, nil
 }
 
 func (q *Queue) Enque(value string) {
@@ -39,5 +52,5 @@ func (q *Queue) Deque() (string, error) {
 	}
 	temp.next = nil
 
-	return temp.value, nil
+	return temp.Value, nil
 }

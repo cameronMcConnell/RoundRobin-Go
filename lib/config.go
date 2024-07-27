@@ -6,8 +6,16 @@ import (
 	"io"
 )
 
-func readConfig() ([]string, error) {
-	file, err := os.Open("config.json")
+type ConfigReader struct {
+	ConfigPath string
+}
+
+func NewConfigReader(configPath string) *ConfigReader {
+	return &ConfigReader{ConfigPath: configPath}
+} 
+
+func (c *ConfigReader) ReadConfig() ([]string, error) {
+	file, err := os.Open(c.ConfigPath)
 	if err != nil {
 		return nil, err
 	}

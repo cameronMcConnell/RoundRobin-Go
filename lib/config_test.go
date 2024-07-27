@@ -5,7 +5,9 @@ import "testing"
 func TestReadConfig(t *testing.T) {
 	wants := []string{"abc", "def", "hij"}
 
-	got, err := readConfig()
+	configReader := NewConfigReader("servers.json")
+
+	got, err := configReader.ReadConfig()
 	if err != nil {
 		t.Error("Failed to read config")
 	}
